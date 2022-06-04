@@ -2,4 +2,5 @@ import os
 
 
 class Config(object):
-    pass
+    ACCESS_KEY = os.getenv("ACCESS_KEY")
+    SECRET_KEY = os.getenv("SECRET_KEY")
