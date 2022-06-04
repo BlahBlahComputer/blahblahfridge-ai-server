@@ -5,6 +5,7 @@ from flask_restx import Namespace, Resource
 
 from blahblah.ocr import reader
 from blahblah.s3.object import get_obj_binary
+from blahblah.rekognition.detect import detect_labels
 
 main_api = Namespace(
     "main",
@@ -23,6 +24,11 @@ class AnalyzeApi(Resource):
             return {"msg": "Bad Request"}, 400
 
         image_obj = get_obj_binary(bucket, key)
-        res = reader.readtext(image_obj, detail=0)
 
-        return make_response(json.dumps({"res": res}, ensure_ascii=False))
+        # ocr
+        ocr_res = reader.readtext(image_obj, detail=0)
+
+        # label
+        label_res = detect_labels(image_obj)
+
+        return make_response(json.dumps({"res": ocr_res + label_res}, ensure_ascii=False))
