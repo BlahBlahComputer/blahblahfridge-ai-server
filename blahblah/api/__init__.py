@@ -19,7 +19,6 @@ main_api = Namespace(
 class AnalyzeApi(Resource):
     def post(self):
         data = request.get_json()
-
         bucket = data.get("bucket")
         key = data.get("key")
         if bucket is None or key is None:
@@ -33,13 +32,15 @@ class AnalyzeApi(Resource):
         ocr_kor_res = set()
         for i in ocr_res:
             for j in source_list:
-                if i in j :
-                    ocr_kor_res.append(j)
+                if j in i :
+                    ocr_kor_res.add(j)
 
         # label
         label_res = detect_labels(image_obj)
 
         label_kor_res=set([ingredient_list[i] for i in label_res if(i in ingredient_list.keys())])
-       
+
+        # print("ocr : " , ocr_res , "\nocr_kor : " , ocr_kor_res)
+        # print("\nlabel : ",label_res, "\nlabel_kor",label_kor_res)        
 
         return make_response(json.dumps({"res": list(ocr_kor_res.union(label_kor_res))}, ensure_ascii=False))
