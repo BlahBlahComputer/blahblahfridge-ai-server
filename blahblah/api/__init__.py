@@ -15,6 +15,11 @@ main_api = Namespace(
     description="기본 api",
 )
 
+@main_api.route("/")
+class DefaultApi(Resource):
+    def get(self):
+        return "health check!", 200
+
 @main_api.route("/analyze")
 class AnalyzeApi(Resource):
     def post(self):
