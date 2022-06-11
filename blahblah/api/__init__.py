@@ -45,8 +45,8 @@ class AnalyzeApi(Resource):
 
         label_kor_res=set([ingredient_list[i] for i in label_res if(i in ingredient_list.keys())])
 
-        # print("ocr : " , ocr_res , "\nocr_kor : " , ocr_kor_res)
-        # print("\nlabel : ",label_res, "\nlabel_kor",label_kor_res)        
+#        print("ocr : " , ocr_res , "\nocr_kor : " , ocr_kor_res)
+#        print("\nlabel : ",label_res, "\nlabel_kor",label_kor_res)        
 
         #return make_response(json.dumps({"res": list(ocr_kor_res.union(label_kor_res))}, ensure_ascii=False))
         return jsonify({"res": list(ocr_kor_res.union(label_kor_res))})
