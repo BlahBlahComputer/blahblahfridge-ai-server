@@ -48,6 +48,4 @@ class AnalyzeApi(Resource):
         # print("ocr : " , ocr_res , "\nocr_kor : " , ocr_kor_res)
         # print("\nlabel : ",label_res, "\nlabel_kor",label_kor_res)        
 
-        return {"res": list(ocr_kor_res.union(label_kor_res))}, 200
-
-        #return make_response(json.dumps({"res": list(ocr_kor_res.union(label_kor_res))}, ensure_ascii=False))
+        return make_response(json.dumps({"res": list(ocr_kor_res.union(label_kor_res))}, ensure_ascii=False))

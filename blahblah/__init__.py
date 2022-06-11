@@ -15,6 +15,7 @@ def create_app(name: str = __name__):
     app.config.from_object(Config)
 
     blahblah_api.init_app(app)
+    blahblah_api.app.blahblah_api.app.config["RESTFUL_JSON"] = {"ensure_ascii": False}
     blahblah_api.add_namespace(main_api)
 
     return app
